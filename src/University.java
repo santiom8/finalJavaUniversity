@@ -20,21 +20,61 @@ public class University {
         return students;
     }
 
-    public boolean verifyExistenceStudent(int id){
-        for (Student student : students){
-            if (student.getId() == id){
+    public boolean verifyExistenceStudent(int id) {
+        for (Student student : students) {
+            if (student.getId() == id) {
                 return true;
             }
         }
         return false;
     }
 
-    public UniversityClass getUniversityClassById(int id){
-        for (UniversityClass universityClass : universityClasses){
-            if (universityClass.getId() == id){
+    public UniversityClass getUniversityClassById(int id) {
+        for (UniversityClass universityClass : universityClasses) {
+            if (universityClass.getId() == id) {
                 return universityClass;
             }
         }
         return null;
+    }
+
+    public Teacher getTeacherById(int id) {
+        for (Teacher teacher : teachers) {
+            if (teacher.getPersonalId() == id) {
+                return teacher;
+            }
+        }
+        return null;
+    }
+
+    public Student getStudentById(int id) {
+        for (Student student : students) {
+            if (student.getId() == id) {
+                return student;
+            }
+        }
+        return null;
+    }
+
+    public void addNewStudent(Student student) {
+        students.add(student);
+    }
+
+    public void addNewUniversityClasses(UniversityClass universityClass) {
+        this.universityClasses.add(universityClass);
+    }
+
+    public void getClassesByStudentId(int id) {
+        universityClasses.forEach(
+                universityClass -> {
+                    universityClass.getStudents().forEach(
+                            student -> {
+                                if (student.getId() == id) {
+                                    System.out.println(universityClass.getName());
+                                }
+                            }
+                    );
+                }
+        );
     }
 }

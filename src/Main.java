@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -8,6 +11,7 @@ public class Main {
         University university = new University();
         initInitialData(university);
         initializeMenu(university);
+
     }
 
     static void initializeMenu(University university) {
@@ -15,8 +19,8 @@ public class Main {
             Scanner scanner = new Scanner(System.in);
             System.out.println("1) Show all teachers");
             System.out.println("2) Show all classes");
-            System.out.println("3) Show all students");
-            System.out.println("4) Enroll student");
+            System.out.println("3) Create student and enroll in class");
+            System.out.println("4) Create a new class and add an existing teacher, existing students");
             System.out.println("5) List all the classes given a student id");
             int option = scanner.nextInt();
             switch (option) {
@@ -29,6 +33,7 @@ public class Main {
                     scanner.close();
                     break;
                 case 3:
+                    //variables
                     int id;
                     String name;
                     int age;
@@ -36,6 +41,7 @@ public class Main {
                     System.out.println("Please type the following: ");
                     System.out.println("Identification student: ");
                     id = scanner.nextInt();
+                    scanner.nextLine();
                     System.out.println("Complete name: ");
                     name = scanner.nextLine();
                     System.out.println("Age: ");
@@ -43,13 +49,14 @@ public class Main {
 
                     if (!university.verifyExistenceStudent(id)) {
                         Student student = new Student(id, name, age);
+                        university.addNewStudent(student);
                         System.out.println("Choose class to enroll student");
                         displayAllClassesOnMenu(university);
                         int optionMenuClass = scanner.nextInt();
-                        UniversityClass universityClassSelected  = university.getUniversityClassById(optionMenuClass);
+                        UniversityClass universityClassSelected = university.getUniversityClassById(optionMenuClass);
                         if (universityClassSelected != null) {
-                           universityClassSelected.addStudent(student);
-                           System.out.println("Student "+student.name+" has been enrolled in class "+universityClassSelected.getName());
+                            universityClassSelected.addStudent(student);
+                            System.out.println("Student " + student.name + " has been enrolled in class " + universityClassSelected.getName());
                         } else {
                             System.out.println("Class not found");
                         }
@@ -57,6 +64,50 @@ public class Main {
                         System.out.println("Student already exists");
                     }
                     scanner.close();
+                    break;
+                case 4:
+                    //Variables
+                    int idClass;
+                    String nameClass;
+                    String assignedClassroom;
+                    String studentsId;
+                    int idTeacher;
+                    Teacher teacher;
+                    UniversityClass universityClass;
+                    String[] studentsIdArray;
+                    List<String> studentsIdList;
+                    //end variables
+                    System.out.println("Create a new class and add an existing teacher, existing students");
+                    System.out.println("Enter class identification");
+                    idClass = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("Enter class name");
+                    nameClass = scanner.nextLine();
+                    System.out.println("Enter assigned classroom");
+                    assignedClassroom = scanner.nextLine();
+                    displayAllTeachersOnMenu(university);
+                    System.out.println("Enter teacher id");
+                    idTeacher = scanner.nextInt();
+                    teacher = university.getTeacherById(idTeacher);
+                    universityClass = new UniversityClass(idClass, nameClass, assignedClassroom, teacher, new ArrayList<>());
+                    scanner.nextLine();
+                    displayAllStudentsOnMenu(university);
+                    System.out.println("Enter students id separated by comma ex: 1,2,3");
+                    studentsId = scanner.nextLine();
+                    studentsIdArray = studentsId.split(",");
+                    studentsIdList = Arrays.asList(studentsIdArray);
+                    UniversityClass finalUniversityClass = universityClass;
+                    studentsIdList.forEach(studentId ->
+                            university.getStudents().stream()
+                                    .filter(student -> student.getId() == Integer.parseInt(studentId))
+                                    .forEach(finalUniversityClass::addStudent));
+                    university.addNewUniversityClasses(universityClass);
+                    scanner.close();
+                    break;
+                case 5:
+                    System.out.println("Enter student id");
+                    int studentId = scanner.nextInt();
+                    university.getClassesByStudentId(studentId);
                     break;
             }
         } catch (Exception e) {
