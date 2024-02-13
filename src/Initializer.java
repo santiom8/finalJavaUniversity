@@ -13,10 +13,10 @@ public class Initializer {
     }
 
     public static void initializeTeachers(List<Teacher> teachers) {
-        teachers.add(new FullTimeTeacher(1, "Alice", 2500000.00, 6));
-        teachers.add(new FullTimeTeacher(2, "Bob", 4000000.00, 10));
-        teachers.add(new PartTimeTeacher(3, "Charlie", 3000000.00, 12));
-        teachers.add(new PartTimeTeacher(4, "David", 2000000.00, 15));
+        teachers.add(new FullTimeTeacher(1, "Alice", 100.0, 6));
+        teachers.add(new FullTimeTeacher(2, "Bob", 100.0, 10));
+        teachers.add(new PartTimeTeacher(3, "Charlie", 100.0, 12));
+        teachers.add(new PartTimeTeacher(4, "David", 100.0, 15));
     }
 
     public static void initializeClasses(University university) {
