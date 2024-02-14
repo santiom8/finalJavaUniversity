@@ -1,3 +1,5 @@
+package Models.Student;
+
 import Contracts.UniversityMembersInterface;
 
 public class Student implements UniversityMembersInterface {

@@ -1,3 +1,9 @@
+import Models.Student.Student;
+import Models.Teacher.Teacher;
+import Models.University;
+import Models.UniversityClass;
+import SeedDataInitializer.Initializer;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,6 +28,7 @@ public class Main {
             System.out.println("3) Create student and enroll in class");
             System.out.println("4) Create a new class and add an existing teacher, existing students");
             System.out.println("5) List all the classes given a student id");
+            System.out.println("6) Exit");
             int option = scanner.nextInt();
             switch (option) {
                 case 1:
@@ -56,12 +63,12 @@ public class Main {
                         UniversityClass universityClassSelected = university.getUniversityClassById(optionMenuClass);
                         if (universityClassSelected != null) {
                             universityClassSelected.addStudent(student);
-                            System.out.println("Student " + student.name + " has been enrolled in class " + universityClassSelected.getName());
+                            System.out.println("Models.Student.Student " + student.getName() + " has been enrolled in class " + universityClassSelected.getName());
                         } else {
                             System.out.println("Class not found");
                         }
                     } else {
-                        System.out.println("Student already exists");
+                        System.out.println("Models.Student.Student already exists");
                     }
                     scanner.close();
                     break;
@@ -109,6 +116,13 @@ public class Main {
                     int studentId = scanner.nextInt();
                     university.getClassesByStudentId(studentId);
                     break;
+                case 6:
+                    System.out.println("Goodbye");
+                    scanner.close();
+                    break;
+                default:
+                    System.out.println("Invalid input");
+                    scanner.close();
             }
         } catch (Exception e) {
             System.out.println("Invalid input");
@@ -128,7 +142,7 @@ public class Main {
                 "Id " + universityClass.getId()
                         + " Name class:" + universityClass.getName()
                         + " Assigned classroom:" + universityClass.getAssignedClassroom()
-                        + " Teacher:" + universityClass.getTeacher().getName()
+                        + " Models.Teacher.Teacher:" + universityClass.getTeacher().getName()
                         + " Students:" + universityClass.getStudents().size()));
     }
 

@@ -1,3 +1,8 @@
+package Models;
+
+import Models.Student.Student;
+import Models.Teacher.Teacher;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,16 +70,17 @@ public class University {
     }
 
     public void getClassesByStudentId(int id) {
-        universityClasses.forEach(
-                universityClass -> {
-                    universityClass.getStudents().forEach(
-                            student -> {
-                                if (student.getId() == id) {
-                                    System.out.println(universityClass.getName());
-                                }
-                            }
-                    );
+        universityClasses.forEach(universityClass -> {
+            universityClass.getStudents().forEach(student -> {
+                if (student.getId() == id) {
+                    System.out.println(
+                    "Id " + universityClass.getId()
+                            + " Name class: " + universityClass.getName()
+                            + " Assigned classroom: " + universityClass.getAssignedClassroom()
+                            + " Models.Teacher.Teacher: " + universityClass.getTeacher().getName()
+                            + " Students: " + universityClass.getStudents().size());
                 }
-        );
+            });
+        });
     }
 }

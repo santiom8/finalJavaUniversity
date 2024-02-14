@@ -1,4 +1,6 @@
-public class FullTimeTeacher extends Teacher{
+package Models.Teacher;
+
+public class FullTimeTeacher extends Teacher {
     private int experienceYears;
 
     public FullTimeTeacher(int id, String name, Double baseSalary, int experienceYears) {
