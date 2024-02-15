@@ -1,4 +1,12 @@
-import java.util.ArrayList;
+package SeedDataInitializer;
+
+import Models.Student.Student;
+import Models.Teacher.FullTimeTeacher;
+import Models.Teacher.PartTimeTeacher;
+import Models.Teacher.Teacher;
+import Models.University;
+import Models.UniversityClass;
+
 import java.util.List;
 
 public class Initializer {

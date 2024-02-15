@@ -1,3 +1,5 @@
+package Models.Teacher;
+
 import Contracts.TeacherInterface;
 import Contracts.UniversityMembersInterface;
 

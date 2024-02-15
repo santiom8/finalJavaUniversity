@@ -1,5 +1,9 @@
+package Models;
+
+import Models.Student.Student;
+import Models.Teacher.Teacher;
+
 import java.util.List;
-import java.util.SplittableRandom;
 
 public class UniversityClass {
     private int id;
