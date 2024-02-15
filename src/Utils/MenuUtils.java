@@ -1,3 +1,5 @@
+package Utils;
+
 import Models.Student.Student;
 import Models.Teacher.Teacher;
 import Models.University;
@@ -27,7 +29,7 @@ public class MenuUtils {
                         + " Age:" + student.getAge()));
     }
 
-    static void displayAllTeachersOnMenu(University university) {
+    public static void displayAllTeachersOnMenu(University university) {
         university.getTeachers().forEach(teacher
                 -> System.out.println(
                 "Id " + teacher.getPersonalId()
@@ -36,7 +38,7 @@ public class MenuUtils {
                         + " Salary:" + teacher.getSalary()));
     }
 
-    static void createNewClassAddTeacherAndStudentsOption(University university, Scanner scanner) {
+    public static void createNewClassAddTeacherAndStudentsOption(University university, Scanner scanner) {
         int idClass;
         String nameClass;
         String assignedClassroom;
@@ -46,10 +48,13 @@ public class MenuUtils {
         UniversityClass universityClass;
         String[] studentsIdArray;
         List<String> studentsIdList;
-        //end variables
         System.out.println("Create a new class and add an existing teacher, existing students");
         System.out.println("Enter class identification");
         idClass = scanner.nextInt();
+        if (university.verifyExistenceClass(idClass)) {
+            System.out.println("Class already exists");
+            return;
+        }
         scanner.nextLine();
         System.out.println("Enter class name");
         nameClass = scanner.nextLine();
@@ -60,8 +65,8 @@ public class MenuUtils {
         idTeacher = scanner.nextInt();
         teacher = university.getTeacherById(idTeacher);
         universityClass = new UniversityClass(idClass, nameClass, assignedClassroom, teacher, new ArrayList<>());
-        scanner.nextLine();
         displayAllStudentsOnMenu(university);
+        scanner.nextLine();
         System.out.println("Enter students id separated by comma ex: 1,2,3");
         studentsId = scanner.nextLine();
         studentsIdArray = studentsId.split(",");
@@ -72,9 +77,12 @@ public class MenuUtils {
                         .filter(student -> student.getId() == Integer.parseInt(studentId))
                         .forEach(finalUniversityClass::addStudent));
         university.addNewUniversityClasses(universityClass);
+        System.out.println("Class " + universityClass.getName() + " has been created");
+        System.out.println("Teacher " + teacher.getName() + " has been assigned to class " + universityClass.getName());
+        System.out.println("Students has been enrolled in class " + universityClass.getName());
     }
 
-    static void createStudentAndEnrollInClass(University university, Scanner scanner) {
+    public static void createStudentAndEnrollInClass(University university, Scanner scanner) {
         int id;
         String name;
         int age;
@@ -107,7 +115,7 @@ public class MenuUtils {
         }
     }
 
-    static void displayAndSelectClass(University university, Scanner scanner) {
+    public static void displayAndSelectClass(University university, Scanner scanner) {
         displayAllClassesOnMenu(university);
         System.out.println("Choose class");
         int optionMenuClass = scanner.nextInt();
