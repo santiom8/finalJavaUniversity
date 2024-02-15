@@ -34,6 +34,15 @@ public class University {
         return false;
     }
 
+    public boolean verifyExistenceClass(int id) {
+        for (UniversityClass universityClass : universityClasses) {
+            if (universityClass.getId() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public UniversityClass getUniversityClassById(int id) {
         for (UniversityClass universityClass : universityClasses) {
             if (universityClass.getId() == id) {

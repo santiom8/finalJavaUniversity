@@ -1,5 +1,6 @@
 import Models.University;
 import SeedDataInitializer.Initializer;
+import Utils.MenuUtils;
 
 import java.util.Scanner;
 
@@ -46,7 +47,7 @@ public class Main {
                     case 4:
                         System.out.println("Result:");
                         MenuUtils.createNewClassAddTeacherAndStudentsOption(university, scanner);
-                        scanner.nextLine();
+                      /*  scanner.nextLine();*/
                         break;
                     case 5:
                         System.out.println("Enter student id");
