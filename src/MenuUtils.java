@@ -82,7 +82,7 @@ public class MenuUtils {
         System.out.println("Please type the following: ");
         System.out.println("Identification student: ");
         id = scanner.nextInt();
-        if(university.verifyExistenceStudent(id)){
+        if (university.verifyExistenceStudent(id)) {
             System.out.println("Student already exists");
             return;
         }
@@ -105,6 +105,29 @@ public class MenuUtils {
         } else {
             System.out.println("Class not found");
         }
+    }
 
+    static void displayAndSelectClass(University university, Scanner scanner) {
+        displayAllClassesOnMenu(university);
+        System.out.println("Choose class");
+        int optionMenuClass = scanner.nextInt();
+        UniversityClass universityClassSelected = university.getUniversityClassById(optionMenuClass);
+        if (universityClassSelected != null) {
+            Teacher teacher = universityClassSelected.getTeacher();
+            System.out.println("Teacher:");
+            System.out.println(
+                    "Id " + teacher.getPersonalId()
+                            + " Name:" + teacher.getName()
+                            + " Age:" + teacher.getAge()
+                            + " Salary:" + teacher.getSalary());
+            System.out.println("Students:");
+            universityClassSelected.getStudents().forEach(
+                    student -> System.out.println(
+                            "Id " + student.getId()
+                                    + " Name:" + student.getName()
+                                    + " Age:" + student.getAge()));
+        } else {
+            System.out.println("Class not found");
+        }
     }
 }
