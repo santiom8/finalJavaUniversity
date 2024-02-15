@@ -1,12 +1,6 @@
-import Models.Student.Student;
-import Models.Teacher.Teacher;
 import Models.University;
-import Models.UniversityClass;
 import SeedDataInitializer.Initializer;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -27,7 +21,7 @@ public class Main {
                 System.out.println();
                 System.out.println("Choose an option");
                 System.out.println("1) Show all teachers");
-                System.out.println("2) Show all classes");
+                System.out.println("2) Show all classes and get information about them");
                 System.out.println("3) Create student and enroll in class");
                 System.out.println("4) Create a new class and add an existing teacher, existing students");
                 System.out.println("5) List all the classes given a student id");
@@ -41,7 +35,7 @@ public class Main {
                         break;
                     case 2:
                         System.out.println("Result:");
-                        MenuUtils.displayAllClassesOnMenu(university);
+                        MenuUtils.displayAndSelectClass(university, scanner);
                         scanner.nextLine();
                         break;
                     case 3:
@@ -61,7 +55,7 @@ public class Main {
                         university.getClassesByStudentId(studentId);
                         break;
                     case 6:
-                        System.out.println("Goodbye");
+                        System.out.println("Goodbye...");
                         scanner.close();
                         break;
                     default:
